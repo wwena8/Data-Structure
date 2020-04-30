@@ -74,6 +74,24 @@ class ShuZu
     }
 
     /**
+     * @return mixed
+     * 返回数组第一个元素
+     */
+    public function getFirst()
+    {
+        return $this->get(0);
+    }
+
+    /**
+     * @return mixed
+     * 返回数组最后一个元素
+     */
+    public function getLast()
+    {
+        return $this->get($this->size-1);
+    }
+
+    /**
      * @param $index
      * @param $e
      * @return mixed
