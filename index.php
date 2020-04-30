@@ -16,4 +16,7 @@ $s->addLast(1);
 $s->addLast(2);
 $s->addLast(2);
 $s->addLast(2);
+$s->removeLast();
+$s->removeLast();
+$s->removeLast();
 echo $s->getCapacity();

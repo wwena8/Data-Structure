@@ -21,3 +21,11 @@
 7 时间复杂度分析 
 
     O(1),O(lgn),O(n),O(nlgn),O(n^2),算法的运行时间与输入数据之间的关系
+    
+8 均摊复杂度与防震荡
+
+    capacity=n n+1次addLast操作，触发resize总共进行2n+1次基本操作
+    
+    平均每次addLast操作需要2次基本操作
+    
+    数组满时：addLast紧接着removeLast   lazzy模式操作

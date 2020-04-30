@@ -73,6 +73,12 @@ class ShuZu
         return $this->data[$index];
     }
 
+    /**
+     * @param $index
+     * @param $e
+     * @return mixed
+     * 修改元素 O(1)
+     */
     public function set($index, $e)
     {
         if ($this->indexWrong($index)) {
@@ -97,7 +103,7 @@ class ShuZu
      */
     public function isFull()
     {
-        return $this->size == count($this->data);
+        return $this->size == $this->getCapacity();
     }
 
     /**
@@ -146,7 +152,7 @@ class ShuZu
     public function add($index, $e)
     {
         if ($this->isFull()) {
-            $this->resize();
+            $this->resize($this->getCapacity()*2);
         }
         if ($this->indexWrong($index)) {
             echo "index is wrong".PHP_EOL;
@@ -190,7 +196,7 @@ class ShuZu
     /**
      * @param $index
      * @return mixed
-     * 删除并返回第index个元素
+     * 删除并返回第index个元素 O(n)
      */
     public function remove($index)
     {
@@ -203,6 +209,9 @@ class ShuZu
             $this->data[$i] = $this->data[$i+1];
         }
         $this->size--;
+
+        if ($this->getSize() == $this->getCapacity()/4 && $this->getCapacity()/2 != 0)
+            $this->resize($this->getCapacity()/2);
         return $r;
     }
 
@@ -217,7 +226,7 @@ class ShuZu
 
     /**
      * @return mixed
-     * 删除最后一个元素
+     * 删除最后一个元素 O(1)
      */
     public function removeLast()
     {
@@ -225,11 +234,11 @@ class ShuZu
     }
 
     /**
-     * 动态数组扩容
+     * 动态数组扩缩容 O(n)
      */
-    public function resize()
+    public function resize($length)
     {
-        $new_data = new SplFixedArray(count($this->data)*2);
+        $new_data = new SplFixedArray($length);
         for($i = 0; $i<$this->size; $i++) {
             $new_data[$i] = $this->data[$i];
         }
@@ -241,7 +250,7 @@ class ShuZu
      */
     public function printf()
     {
-        $capacity = count($this->data);
+        $capacity = $this->getCapacity();
         $s = "Array: size = $this->size, capacity = $capacity".PHP_EOL;
         $s .= "[";
         for ($i = 0; $i < $this->size; $i++) {
