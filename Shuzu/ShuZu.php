@@ -67,10 +67,28 @@ class ShuZu
     public function get($index)
     {
         if ($this->indexWrong2($index)) {
-            echo "index is wrong".PHP_EOL;
+            echo "get index is wrong".PHP_EOL;
             exit(-1);
         }
         return $this->data[$index];
+    }
+
+    /**
+     * @return mixed
+     * 返回数组第一个元素
+     */
+    public function getFirst()
+    {
+        return $this->get(0);
+    }
+
+    /**
+     * @return mixed
+     * 返回数组最后一个元素
+     */
+    public function getLast()
+    {
+        return $this->get($this->size-1);
     }
 
     /**
@@ -82,7 +100,7 @@ class ShuZu
     public function set($index, $e)
     {
         if ($this->indexWrong($index)) {
-            echo "index is wrong".PHP_EOL;
+            echo "set index is wrong".PHP_EOL;
             exit(-1);
         }
         return $this->data[$index] = $e;
@@ -155,7 +173,7 @@ class ShuZu
             $this->resize($this->getCapacity()*2);
         }
         if ($this->indexWrong($index)) {
-            echo "index is wrong".PHP_EOL;
+            echo "set index is wrong".PHP_EOL;
             exit(-1);
         }
         for ($i = $this->size-1; $i >= $index; $i--) {
@@ -201,7 +219,7 @@ class ShuZu
     public function remove($index)
     {
         if ($this->indexWrong($index)) {
-            echo "index is wrong".PHP_EOL;
+            echo "set index is wrong".PHP_EOL;
             exit(-1);
         }
         $r = $this->data[$index];
