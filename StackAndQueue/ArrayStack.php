@@ -34,34 +34,82 @@ class ArrayStack implements Stack
         $this->array = new ShuZu($capacity);
     }
 
+    /**
+     * @return mixed
+     * 栈大小
+     */
     public function getSize()
     {
         return $this->array->getSize();
     }
 
+    /**
+     * @return bool
+     * 栈是否为空
+     */
     public function isEmpty()
     {
         return $this->array->isEmpty();
     }
 
+    /**
+     * @return int
+     * 栈容量
+     */
     public function getCapacity()
     {
         return $this->array->getCapacity();
     }
 
+    /**
+     * @param $e
+     * 入栈
+     */
     public function push($e)
     {
         $this->array->addLast($e);
     }
 
+    /**
+     * @return mixed
+     * 出栈
+     */
     public function pop()
     {
         return $this->array->removeLast();
     }
 
+    /**
+     * @return mixed
+     * 返回栈顶元素
+     */
     public function peek()
     {
         return $this->array->getLast();
+    }
+
+    /**
+     * @param $s
+     * @return bool
+     * 括号匹配问题
+     */
+    public function isValid($s)
+    {
+        $stack = new ArrayStack();
+        $chars = str_split($s);
+        foreach ($chars as $char) {
+            if (in_array($char, ['[','{','('])) {
+                $stack->push($char);
+            } else {
+                if ($stack->peek() == '[' && $char == ']')
+                    $stack->pop();
+                if ($stack->peek() == '{' && $char == '}')
+                    $stack->pop();
+                if ($stack->peek() == '(' && $char == ')')
+                    $stack->pop();
+            }
+        }
+        return $stack->isEmpty();
     }
 
     /**
@@ -81,7 +129,7 @@ class ArrayStack implements Stack
                 $s .= "$e,";
             }
         }
-        $s .= "]";
+        $s .= "] top";
         echo $s;
     }
 }

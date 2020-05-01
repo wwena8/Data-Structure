@@ -10,8 +10,10 @@ define('CORE', DS.'/core'); //类型目录
 use StackAndQueue\ArrayStack;
 include CORE."/Util.php";
 spl_autoload_register('\CORE\Util::load');
-$stack = new ArrayStack();
+$stack = new ArrayStack(2);
 $stack->push(1);
 $stack->push(2);
 $stack->push(3);
-$stack->printf();
+//$stack->printf();
+$s = new \StackAndQueue\Solution();
+echo $s->isValid("[[]]");
