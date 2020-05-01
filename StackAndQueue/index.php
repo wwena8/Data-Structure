@@ -10,10 +10,23 @@ define('CORE', DS.'/core'); //类型目录
 use StackAndQueue\ArrayStack;
 include CORE."/Util.php";
 spl_autoload_register('\CORE\Util::load');
-$stack = new ArrayStack(2);
-$stack->push(1);
-$stack->push(2);
-$stack->push(3);
-//$stack->printf();
-$s = new \StackAndQueue\Solution();
-echo $s->isValid("[[]]");
+$array_queue = new \StackAndQueue\ArrayQueue();
+$loop_queue = new \StackAndQueue\LoopQueue();
+$i = 0;
+while ($i < 100000) {
+    $array_queue->enqueue(rand(0,1000));
+    $loop_queue->enqueue(rand(0,1000));
+    $i++;
+}
+$start1 = time();
+while (!$array_queue->isEmpty()) {
+    $array_queue->dequeue();
+}
+$start2 = time();
+while (!$loop_queue->isEmpty()) {
+    $loop_queue->dequeue();
+}
+$start3 = time();
+$wast1 = $start2-$start1;
+$wast2 = $start3-$start2;
+echo "array:$wast1   loop:$wast2".PHP_EOL;
