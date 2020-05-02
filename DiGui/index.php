@@ -10,9 +10,5 @@ define('CORE', DS.'/core'); //类型目录
 use StackAndQueue\ArrayStack;
 include CORE."/Util.php";
 spl_autoload_register('\CORE\Util::load');
-$linked_list_queue = new \StackAndQueue\LinkedListQueue();
-$linked_list_queue->enqueue(1);
-$linked_list_queue->enqueue(2);
-$linked_list_queue->enqueue(3);
-$linked_list_queue->dequeue();
-$linked_list_queue->printf();
+$n = new \DiGui\ListNode(2);
+$n->out();
