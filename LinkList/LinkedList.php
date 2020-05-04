@@ -152,6 +152,26 @@ class LinkedList
         return $node;
     }
 
+    public function removeElement($e)
+    {
+        /**
+         * @var Node $current
+         */
+        $current = $this->dummyHead;
+        while ($current->next != null) {
+            $next = $current->next;
+            if ($next != null) {
+                if ($next->e == $e) {   //找到元素e时current不往后走
+                    $current->next = $next->next;
+                    $next->next = null;
+                    $this->size--;
+                } else {
+                    $current = $current->next;
+                }
+            }
+        }
+    }
+
     public function removeFirst()
     {
         $this->remove(0);
@@ -178,6 +198,9 @@ class LinkedList
 }
 class Node{
     public $e;
+    /**
+     * @var Node $next
+     */
     public $next;
 
     public function __construct()
